@@ -1,0 +1,94 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    width: 100%;
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+}
+
+.btn {
+    padding: 10px 30px;
+}
+
+form {
+    width: 40%;
+    margin: 30px auto;
+    background-color: aliceblue;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(200, 200, 200) !important;
+}
+
+form input[type="email"], input[type="password"], input[type="text"], input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid rgb(200, 200, 200) !important;
+}
+
+form input:focus {
+    border: 1px solid rgb(119, 117, 117) !important;
+}
+
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.in-nav a {
+    text-decoration: none;
+    color: aliceblue;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(4, 98, 181);
+    color: aliceblue;
+}
+
+.data {
+    width: 60%;
+    margin: 30px auto;
+    background-color: aliceblue;
+    border: 1px solid rgb(200, 200, 200) !important;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+}
+
+table, tr, td, th {
+    border: 1px solid rgb(200, 200, 200) !important;
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+.danger-badge {
+    background-color: red;
+    color: aliceblue;
+    border-radius: 5px;
+    border: 0;
+}
+.warning-badge {
+    background-color: green;
+    color: aliceblue;
+    border-radius: 5px;
+    border: 0;
+}
+
+span {
+    font-weight: bold;
+}
