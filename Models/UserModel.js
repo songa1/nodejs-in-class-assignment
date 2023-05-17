@@ -125,4 +125,30 @@ const deleteUser = async (id, callback) => {
   }
 };
 
-module.exports = { getAll, getUser, addUser, getUserByEmail, deleteUser };
+const updateUser = (userId, updatedData, callback) => {
+  const { user_name, user_email, user_phone } = updatedData;
+
+  // Execute the database update query
+
+  let updatedDate = `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`;
+  db.query(
+    "UPDATE users SET user_name = ?, user_email = ?, user_phone = ?, updated_at = ? WHERE user_id = ?",
+    [user_name, user_email, user_phone, updatedDate, userId],
+    (error, results) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, results);
+      }
+    }
+  );
+};
+
+module.exports = {
+  getAll,
+  getUser,
+  addUser,
+  getUserByEmail,
+  deleteUser,
+  updateUser,
+};

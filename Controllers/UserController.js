@@ -1,4 +1,10 @@
-const { getAll, getUser, addUser, deleteUser } = require("../Models/UserModel");
+const {
+  getAll,
+  getUser,
+  addUser,
+  deleteUser,
+  updateUser,
+} = require("../Models/UserModel");
 
 const UserController = {
   getUsers: async (req, res) => {
@@ -57,7 +63,29 @@ const UserController = {
     }
   },
 
-  updateUser(req, res) {},
+  updateUser(req, res) {
+    const userId = req.params.id;
+    const { user_name, user_email, user_phone } = req.body;
+    const updatedData = {
+      user_name,
+      user_email,
+      user_phone,
+    };
+
+    updateUser(userId, updatedData, (error, result) => {
+      if (error) {
+        console.error("Error updating user:", error);
+        return res.status(500).json({
+          error: "An error occurred while updating the user.",
+          message: error,
+        });
+      }
+
+      return res
+        .status(200)
+        .json({ message: "User updated successfully.", response: result });
+    });
+  },
 
   deleteUser: async (req, res) => {
     const id = req.params.id;
