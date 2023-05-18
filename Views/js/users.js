@@ -44,7 +44,7 @@ function renderUsers(data) {
     fetch(`http://localhost:3000/api/users/${data.user_id}`, {
       method: "DELETE",
       headers: {
-        "x-access-token": token,
+        authorization: token,
       },
     })
       .then((res) => res.json())
@@ -55,12 +55,16 @@ function renderUsers(data) {
 
 fetch("http://localhost:3000/api/users", {
   headers: {
-    "x-access-token": token,
+    authorization: token,
   },
 })
   .then((res) => res.json())
   .then((data) => {
-    console.log(data);
-    for (let user of data.payload) renderUsers(user);
+    if (data.status === 401 || data.status === 403) {
+      window.location.href = "./index.html";
+      alert("Not authorized! Please login.");
+    } else {
+      for (let user of data.payload) renderUsers(user);
+    }
   })
   .catch((err) => console.error(err.message));

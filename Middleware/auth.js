@@ -19,18 +19,20 @@ const generateToken = (payload) => {
   return jwt.sign(payload, secret, { expiresIn });
 };
 
-const verifyToken = (req, res) => {
-  const token = req.headers["x-access-token"];
+const verifyToken = (req, res, next) => {
+  const token = req.headers.authorization;
 
   if (!token) {
-    res.status(403).json({ message: "Token unavailable" });
-  } else {
-    try {
-      const decoded = jwt.verify(token, secret);
-      return true;
-    } catch (error) {
-      res.status(401).json({ message: "Invalid token", error: error.message });
-    }
+    return res.status(401).json({ status: 401, message: "No token provided" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, secret);
+    req.user = decoded;
+
+    next();
+  } catch (err) {
+    return res.status(403).json({ status: 403, message: "Invalid token" });
   }
 };
 

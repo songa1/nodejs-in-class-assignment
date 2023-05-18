@@ -21,21 +21,37 @@ submitBtn.addEventListener("click", (e) => {
   };
 
   console.log(user);
-
-  let pass = checkPass();
-
-  if (pass) {
-    fetch("http://localhost:3000/api/auth/register", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+  if (
+    form.name.value === "" ||
+    form.email.value === "" ||
+    form.phone.value === "" ||
+    form.password.value === "" ||
+    form.c_password.value === ""
+  ) {
+    alert("Don't leave any field empty!");
   } else {
-    document.querySelector(".feedback").innerHTML = "Passwords don't match!";
+    let pass = checkPass();
+
+    if (pass) {
+      fetch("http://localhost:3000/api/auth/register", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      })
+        .then((res) => {
+          if (res.statusText === "Created") {
+            alert("Successfully created user!");
+            window.location.href = "./index.html";
+          } else {
+            alert("Failed to create user! Try again.");
+          }
+        })
+        .catch((err) => alert(err.message));
+    } else {
+      alert("Passwords don't match!");
+    }
   }
 });

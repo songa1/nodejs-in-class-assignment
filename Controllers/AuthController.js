@@ -35,7 +35,9 @@ const AuthController = {
             .json({ message: "Login failed", error: "Wrong password" });
         }
       } else {
-        console.log("User not found");
+        res
+        .status(400)
+        .json({ message: "Login failed", error: "User is not found" });
       }
     });
 

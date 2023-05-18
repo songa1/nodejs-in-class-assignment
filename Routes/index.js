@@ -5,7 +5,7 @@ const { verifyToken } = require("../Middleware/auth");
 
 const Routes = express.Router();
 
-Routes.use("/users", UserRoutes);
+Routes.use("/users", verifyToken, UserRoutes);
 Routes.use("/auth", AuthRoutes);
 
 module.exports = Routes;
